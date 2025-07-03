@@ -1,4 +1,4 @@
-//
+//12345678
 //  CryptoApp.swift
 //  Crypto
 //
@@ -9,12 +9,22 @@ import SwiftUI
 
 @main
 struct CryptoApp: App {
-    let persistenceController = PersistenceController.shared
 
+    @StateObject private var vm = HomeViewModel()
+    
+    init() {
+        UINavigationBar.appearance().largeTitleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
+        UINavigationBar.appearance().titleTextAttributes = [.foregroundColor: UIColor(Color.theme.accent)]
+    }
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
-                .environment(\.managedObjectContext, persistenceController.container.viewContext)
+            NavigationView {
+                HomeView()
+                    .navigationBarHidden(true)
+            }
+            .environmentObject(vm)
         }
     }
 }
+    
